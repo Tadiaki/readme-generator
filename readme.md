@@ -1,100 +1,81 @@
 # awesome-project
 
-## Description
-
 A mock package.json file for generating a README.md using an LLM.
 
-## Scripts
+## Project Scripts
 
-These are the available scripts for this project:
-
-- Start the project
-- Run tests
-- Build the project
-- Lint the code
-- Format the code
-
-## Start the project
-
+- **start**: Launches the project using Node.js. The command is as follows:
+  
 ```bash
 npm run start
 ```
 
-## Run tests
-
+- **test**: Runs tests using Jest. The command is:
+  
 ```bash
 npm run test
 ```
 
-## Build the project
-
+- **build**: Compiles the project using Webpack in production mode. The command is:
+  
 ```bash
 npm run build
 ```
 
-## Lint the code
-
+- **lint**: Lints the project using ESLint. The command is:
+  
 ```bash
 npm run lint
 ```
 
-## Format the code
-
+- **format**: Formats the project using Prettier. The command is:
+  
 ```bash
 npm run format
 ```
 
-## Dependencies
-
-| Package | Version |
-| --- | --- |
-| express | ^4.18.2 |
-| cors | ^2.8.5 |
-
-## DevDependencies
-
-| Package | Version |
-| --- | --- |
-| jest | ^29.6.2 |
-| webpack | ^5.88.2 |
-| eslint | ^8.47.0 |
-| prettier | ^3.0.3 |
-
-## Author
+## Project Author
 
 Jane Doe <jane.doe@example.com>
 
-## License
+## Project License
 
 MIT
 
-## Repository
+## Project Repository
 
-[GitHub Repository](https://github.com/janedoe/awesome-project.git)
+[GitHub](https://github.com/janedoe/awesome-project.git)
 
-## Bugs
+## Project Bugs
 
-[Report Bugs](https://github.com/janedoe/awesome-project/issues)
+[GitHub Issues](https://github.com/janedoe/awesome-project/issues)
 
-## Homepage
+## Project Homepage
 
-[Project Homepage](https://github.com/janedoe/awesome-project#readme)
+[GitHub](https://github.com/janedoe/awesome-project#readme)
 
-## Keywords
+## Project Keywords
 
-- markdown
-- readme
-- generator
-- example
+markdown, readme, generator, example
 
-## Engines
+## Project Dependencies
 
-| Node | NPM |
-| --- | --- |
-| >=14.0.0 | >=6.0.0 |
+- express: ^4.18.2
+- cors: ^2.8.5
 
-## Funding
+## Project Development Dependencies
 
-[Fund the project](https://github.com/sponsors/janedoe)
+- jest: ^29.6.2
+- webpack: ^5.88.2
+- eslint: ^8.47.0
+- prettier: ^3.0.3
 
----
+## Project Engines
+
+- node: >=14.0.0
+- npm: >=6.0.0
+
+## Project Funding
+
+[GitHub Sponsors](https://github.com/sponsors/janedoe)
+

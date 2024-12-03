@@ -192,46 +192,6 @@ def setup_agents():
     return user_proxy, readme_generator_agent
 
 
-def get_tool_calls(chat_result: ChatResult):
-    """
-    Return the tool calls from the chat result.
-    """
-    tool_call_history = []
-
-    for message in chat_result.chat_history:
-        if "tool_calls" in message.keys():
-            tool_calls = map(lambda x: { "name": x["function"]["name"], "arguments": ast.literal_eval(x["function"]["arguments"]) }, message["tool_calls"])
-            tool_call_history.extend(list(tool_calls))
-
-    return tool_call_history
-
-
-def find_final_answer(chat_result: ChatResult):
-    """
-    Generate the final answer from the chat results in a newly generated README in the specified directory.
-    """
-
-    # Get the chat history
-    messages = chat_result.chat_history
-    final_answer = None
-
-    # Iterate over the chat history in reverse order
-    for message in reversed(messages):
-        # Check if the message contains the final answer
-        if "final answer:" in message.get("content", "").lower():
-            # Get the final answer block    
-            final_answer_block = message.get("content", "")
-
-            # Split the final answer block into lines
-            answer_block_lines = final_answer_block.split("\n")
-
-            # Get the final answer
-            final_answer = answer_block_lines[-1].split("Final Answer:")[1].strip()
-            break
-
-    # Return the final answer
-    return final_answer
-
 
 def main():
     # Setup the agents
@@ -245,6 +205,7 @@ def main():
         feedback_analysis_agent,
         message=task,
     )
+    
 
 
 if __name__ == "__main__":
