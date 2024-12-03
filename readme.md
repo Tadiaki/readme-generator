@@ -1,49 +1,100 @@
 # awesome-project
+
 ## Description
+
 A mock package.json file for generating a README.md using an LLM.
+
 ## Scripts
-The following are the scripts available for this project:
-- Start the application
+
+These are the available scripts for this project:
+
+- Start the project
 - Run tests
-- Build the application
+- Build the project
 - Lint the code
 - Format the code
-### Start the application
+
+## Start the project
+
+```bash
+npm run start
 ```
-node index.js
+
+## Run tests
+
+```bash
+npm run test
 ```
-### Run tests
+
+## Build the project
+
+```bash
+npm run build
 ```
-jest
+
+## Lint the code
+
+```bash
+npm run lint
 ```
-### Build the application
+
+## Format the code
+
+```bash
+npm run format
 ```
-webpack --mode production
-```
-### Lint the code
-```
-eslint .
-```
-### Format the code
-```
-prettier --write .
-```
+
 ## Dependencies
+
 | Package | Version |
 | --- | --- |
 | express | ^4.18.2 |
 | cors | ^2.8.5 |
 
+## DevDependencies
+
+| Package | Version |
+| --- | --- |
+| jest | ^29.6.2 |
+| webpack | ^5.88.2 |
+| eslint | ^8.47.0 |
+| prettier | ^3.0.3 |
+
 ## Author
+
 Jane Doe <jane.doe@example.com>
+
 ## License
+
 MIT
+
 ## Repository
+
 [GitHub Repository](https://github.com/janedoe/awesome-project.git)
+
 ## Bugs
-[Report an issue](https://github.com/janedoe/awesome-project/issues)
+
+[Report Bugs](https://github.com/janedoe/awesome-project/issues)
+
 ## Homepage
+
 [Project Homepage](https://github.com/janedoe/awesome-project#readme)
+
+## Keywords
+
+- markdown
+- readme
+- generator
+- example
+
+## Engines
+
+| Node | NPM |
+| --- | --- |
+| >=14.0.0 | >=6.0.0 |
+
 ## Funding
-[Support me on GitHub Sponsors](https://github.com/sponsors/janedoe)
+
+[Fund the project](https://github.com/sponsors/janedoe)
+
 ---

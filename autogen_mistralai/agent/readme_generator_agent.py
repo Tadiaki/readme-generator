@@ -42,7 +42,7 @@ def create_readme_generator_agent() -> AssistantAgent:
             - Always include the project name and description.
             - Include scripts if they are present in the package.json file the scripts should be constructed as follows:
                 1. A description of what the script is used for in a paragraph.
-                2. A code block with the script's command using the mh_code_block tool.
+                2. A code block with the script's command using the mh_code_block tool prefixed with npm run.
             - Add sections for dependencies (and their versions), license, and author if applicable.
             - Use the registered Markdown functions to generate the content.
 
