@@ -11,7 +11,8 @@ ReAct_prompt = """
 
     Steps:
     1. Parse the `package.json` and reason about the required sections.
-    2. Use tools to generate Markdown content.
+    2. Use tools to generate Markdown appropriate content.
+    3. Verify 
     3. Call `write_to_file` to save the content incrementally.
 
     Remember:
@@ -39,8 +40,10 @@ def create_readme_generator_agent() -> AssistantAgent:
             Your task is to analyze the fields in a `package.json` file and generate an appropriate README file using only the tools provided.
             Include information logically based on the following guidelines:
             - Always include the project name and description.
-            - Include installation and usage instructions if scripts are present.
-            - Add sections for dependencies, license, and author if applicable.
+            - Include scripts if they are present in the package.json file the scripts should be constructed as follows:
+                1. A description of what the script is used for in a paragraph.
+                2. A code block with the script's command using the mh_code_block tool.
+            - Add sections for dependencies (and their versions), license, and author if applicable.
             - Use the registered Markdown functions to generate the content.
 
             Do not output anything other than the tools' results or the final answer. Reply with TERMINATE when the task is done.
@@ -61,7 +64,7 @@ def create_user_proxy(code_executor: LocalCommandLineCodeExecutor):
         human_input_mode="NEVER",
         max_consecutive_auto_reply=10,
         code_execution_config={
-        "executor": LocalCommandLineCodeExecutor(work_dir="readmes"),
+        "executor": LocalCommandLineCodeExecutor(),
         },
     )
     return user_proxy
@@ -95,7 +98,6 @@ def setup_agents():
         description="Generates a markdown header based on the input text and level."
     )
     
-    # Add the different methods from the md writer tool.
     print("registering readme generator paragraph")
     register_function(
         MH.paragraph, 
@@ -105,7 +107,6 @@ def setup_agents():
         description="Generates a markdown paragraph based on the input text."
     )
     
-    # Add the different methods from the md writer tool.
     print("registering readme generator list")
     register_function(
         MH.list, 
@@ -115,7 +116,6 @@ def setup_agents():
         description="Generates a markdown list based on the input items and ordered flag."
     )
     
-    # Add the different methods from the md writer tool.
     print("registering readme generator code_block")
     register_function(
         MH.code_block, 
@@ -125,7 +125,6 @@ def setup_agents():
         description="Generates a markdown code_block based on the input code and language."
     )
     
-    # Add the different methods from the md writer tool.
     print("registering readme generator link")
     register_function(
         MH.link, 
@@ -135,7 +134,6 @@ def setup_agents():
         description="Generates a markdown link based on the input text and url."
     )
     
-    # Add the different methods from the md writer tool.
     print("registering readme generator image")
     register_function(
         MH.image, 
@@ -145,7 +143,6 @@ def setup_agents():
         description="Generates a markdown image based on the input alt_text and url."
     )
     
-    # Add the different methods from the md writer tool.
     print("registering readme generator table")
     register_function(
         MH.table, 
@@ -155,7 +152,6 @@ def setup_agents():
         description="Generates a markdown table based on the input headers and rows."
     )
     
-    # Add the different methods from the md writer tool.
     print("registering readme generator blockquote")
     register_function(
         MH.blockquote, 
@@ -165,7 +161,6 @@ def setup_agents():
         description="Generates a markdown blockquote based on the input text."
     )
     
-    # Add the different methods from the md writer tool.
     print("registering readme generator horizontal_rule")
     register_function(
         MH.horizontal_rule, 
@@ -243,7 +238,7 @@ def main():
     user_proxy, feedback_analysis_agent = setup_agents()
 
     # Define the task
-    task = "Generate a README for a project using the provided project example data and write a readme.md file to the working directory."
+    task = "Generate a README for a project using the provided project example data and write a readme.md file."
 
     # Initiate the chat
     user_proxy.initiate_chat(

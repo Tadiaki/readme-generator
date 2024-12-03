@@ -89,7 +89,7 @@ class MarkdownHelper:
         header_line = "| " + " | ".join(headers) + " |"
         separator_line = "| " + " | ".join("---" for _ in headers) + " |"
         rows_lines = "\n".join("| " + " | ".join(row) + " |" for row in rows)
-        return f"{header_line}\n{separator_line}\n{rows_lines}\n"
+        return f"{header_line}\n{separator_line}\n{rows_lines}\n\n"
     
     @staticmethod
     def blockquote(text: Annotated[str, "The blockquote text"]) -> Annotated[str, "A formatted blockquote string"]:
@@ -109,22 +109,7 @@ class MarkdownHelper:
         :return: A horizontal rule string.
         """
         return "---\n"
-    
-    @staticmethod
-    def generate_installation_section(
-        scripts: Annotated[Dict[str, str], "A dictionary of npm script commands"]
-    ) -> Annotated[str, "Formatted Markdown for installation and usage instructions"]:
-        """
-        Generate the installation and usage instructions based on scripts.
-        """
-        install_command = scripts.get("install", "npm install")
-        start_command = scripts.get("start", "npm start")
-        return (
-            MarkdownHelper.paragraph("### Installation") +
-            MarkdownHelper.code_block(install_command, "bash") +
-            MarkdownHelper.paragraph("### Running the Project") +
-            MarkdownHelper.code_block(start_command, "bash")
-        )
+
         
 
 
@@ -180,6 +165,7 @@ class MarkdownHelper:
         data = json.loads(json_string) 
         return {
             "name": data.get("name", "Unknown Project"),
+            "version": data.get("version", "Unknown Version"),
             "description": data.get("description", "No description provided."),
             "scripts": data.get("scripts", {}),
             "author": data.get("author", "Unknown Author"),
@@ -207,5 +193,6 @@ class MarkdownHelper:
         :param mode: The file mode, e.g., 'w' for write, 'a' for append.
         :return: None
         """
+        
         with open(file_path, mode) as file:
             file.write(content)
