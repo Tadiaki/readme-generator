@@ -1,12 +1,14 @@
-from typing import Annotated
+from typing import List, Dict, Annotated
+import json
+
 
 class MarkdownHelper:
     """
     A helper class to generate README content with proper Markdown syntax.
     """
-    
+
     @staticmethod
-    def header(text, level=1):
+    def header(text: Annotated[str, "The header text"], level: Annotated[int, "The header level (1-6)"] = 1) -> Annotated[str, "A formatted header string"]:
         """
         Generates a Markdown header.
         
@@ -19,7 +21,7 @@ class MarkdownHelper:
         return f"{'#' * level} {text}\n"
     
     @staticmethod
-    def paragraph(text):
+    def paragraph(text: Annotated[str, "The paragraph text"]) -> Annotated[str, "A formatted paragraph string"]:
         """
         Generates a Markdown paragraph.
         
@@ -29,7 +31,7 @@ class MarkdownHelper:
         return f"{text}\n"
     
     @staticmethod
-    def list(items, ordered=False):
+    def list(items: Annotated[List[str], "A list of items to include"], ordered: Annotated[bool, "True for ordered list, False for unordered"] = False) -> Annotated[str, "A formatted list string"]:
         """
         Generates a Markdown list.
         
@@ -43,7 +45,7 @@ class MarkdownHelper:
             return "\n".join(f"- {item}" for item in items) + "\n"
     
     @staticmethod
-    def code_block(code, language=""):
+    def code_block(code: Annotated[str, "The code string"], language: Annotated[str, "The programming language for syntax highlighting"] = "") -> Annotated[str, "A formatted code block string"]:
         """
         Generates a Markdown code block.
         
@@ -54,7 +56,7 @@ class MarkdownHelper:
         return f"```{language}\n{code}\n```\n"
     
     @staticmethod
-    def link(text, url):
+    def link(text: Annotated[str, "The link text"], url: Annotated[str, "The URL"]) -> Annotated[str, "A formatted link string"]:
         """
         Generates a Markdown link.
         
@@ -65,7 +67,7 @@ class MarkdownHelper:
         return f"[{text}]({url})"
       
     @staticmethod
-    def image(alt_text, url):
+    def image(alt_text: Annotated[str, "The alternative text for the image"], url: Annotated[str, "The URL of the image"]) -> Annotated[str, "A formatted image string"]:
         """
         Generates a Markdown image.
         
@@ -76,7 +78,7 @@ class MarkdownHelper:
         return f"![{alt_text}]({url})\n"
     
     @staticmethod
-    def table(headers, rows):
+    def table(headers: Annotated[List[str], "A list of header titles"], rows: Annotated[List[List[str]], "A list of lists representing rows"]) -> Annotated[str, "A formatted table string"]:
         """
         Generates a Markdown table.
         
@@ -90,7 +92,7 @@ class MarkdownHelper:
         return f"{header_line}\n{separator_line}\n{rows_lines}\n"
     
     @staticmethod
-    def blockquote(text):
+    def blockquote(text: Annotated[str, "The blockquote text"]) -> Annotated[str, "A formatted blockquote string"]:
         """
         Generates a Markdown blockquote.
         
@@ -100,7 +102,7 @@ class MarkdownHelper:
         return f"> {text}\n"
     
     @staticmethod
-    def horizontal_rule():
+    def horizontal_rule() -> Annotated[str, "A horizontal rule string"]:
         """
         Generates a Markdown horizontal rule.
         
@@ -109,51 +111,101 @@ class MarkdownHelper:
         return "---\n"
     
     @staticmethod
-    def annotation_wrapper() -> Annotated[str, "A json string for a package.json file from a project"]:
+    def generate_installation_section(
+        scripts: Annotated[Dict[str, str], "A dictionary of npm script commands"]
+    ) -> Annotated[str, "Formatted Markdown for installation and usage instructions"]:
         """
-        Wraps a string with an annotation.
+        Generate the installation and usage instructions based on scripts.
+        """
+        install_command = scripts.get("install", "npm install")
+        start_command = scripts.get("start", "npm start")
+        return (
+            MarkdownHelper.paragraph("### Installation") +
+            MarkdownHelper.code_block(install_command, "bash") +
+            MarkdownHelper.paragraph("### Running the Project") +
+            MarkdownHelper.code_block(start_command, "bash")
+        )
         
-        :return: project1 wrapped in an annotation.
+
+
+    def parse_package_json() -> Annotated[Dict[str, str], "Dictionary with extracted fields from a hardcoded package.json"] :
         """
-        return """{
-    "name": "awesome-project",
-    "version": "1.0.0",
-    "description": "A mock package.json file for generating a README.md using an LLM.",
-    "main": "index.js",
-    "scripts": {
-        "start": "node index.js",
-        "test": "jest",
-        "build": "webpack --mode production",
-        "lint": "eslint .",
-        "format": "prettier --write ."
-    },
-    "keywords": ["markdown", "readme", "generator", "example"],
-    "author": "Jane Doe <jane.doe@example.com>",
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/janedoe/awesome-project.git"
-    },
-    "bugs": {
-        "url": "https://github.com/janedoe/awesome-project/issues"
-    },
-    "homepage": "https://github.com/janedoe/awesome-project#readme",
-    "dependencies": {
-        "express": "^4.18.2",
-        "cors": "^2.8.5"
-    },
-    "devDependencies": {
-        "jest": "^29.6.2",
-        "webpack": "^5.88.2",
-        "eslint": "^8.47.0",
-        "prettier": "^3.0.3"
-    },
-    "engines": {
-        "node": ">=14.0.0",
-        "npm": ">=6.0.0"
-    },
-    "funding": {
-        "type": "individual",
-        "url": "https://github.com/sponsors/janedoe"
-    }
-    }"""
+        Parse a hardcoded package.json string to extract relevant fields.
+
+        :return: A dictionary with extracted fields.
+        """
+        json_string = """{
+            "name": "awesome-project",
+            "version": "1.0.0",
+            "description": "A mock package.json file for generating a README.md using an LLM.",
+            "main": "index.js",
+            "scripts": {
+                "start": "node index.js",
+                "test": "jest",
+                "build": "webpack --mode production",
+                "lint": "eslint .",
+                "format": "prettier --write ."
+            },
+            "keywords": ["markdown", "readme", "generator", "example"],
+            "author": "Jane Doe <jane.doe@example.com>",
+            "license": "MIT",
+            "repository": {
+                "type": "git",
+                "url": "https://github.com/janedoe/awesome-project.git"
+            },
+            "bugs": {
+                "url": "https://github.com/janedoe/awesome-project/issues"
+            },
+            "homepage": "https://github.com/janedoe/awesome-project#readme",
+            "dependencies": {
+                "express": "^4.18.2",
+                "cors": "^2.8.5"
+            },
+            "devDependencies": {
+                "jest": "^29.6.2",
+                "webpack": "^5.88.2",
+                "eslint": "^8.47.0",
+                "prettier": "^3.0.3"
+            },
+            "engines": {
+                "node": ">=14.0.0",
+                "npm": ">=6.0.0"
+            },
+            "funding": {
+                "type": "individual",
+                "url": "https://github.com/sponsors/janedoe"
+            }
+            }"""  
+    
+        data = json.loads(json_string) 
+        return {
+            "name": data.get("name", "Unknown Project"),
+            "description": data.get("description", "No description provided."),
+            "scripts": data.get("scripts", {}),
+            "author": data.get("author", "Unknown Author"),
+            "license": data.get("license", "No license specified."),
+            "repository": data.get("repository", {}),
+            "bugs": data.get("bugs", {}),
+            "homepage": data.get("homepage", ""),
+            "keywords": data.get("keywords", []),
+            "dependencies": data.get("dependencies", {}),
+            "devDependencies": data.get("devDependencies", {}),
+            "engines": data.get("engines", {}),
+            "funding": data.get("funding", {})
+        }
+        
+    def write_to_file(
+    file_path: Annotated[str, "The path to the file where content will be written"], 
+    content: Annotated[str, "The content to write to the file"], 
+    mode: Annotated[str, "The file mode, e.g., 'w' for write, 'a' for append"] = 'a'
+) -> Annotated[None, "This function does not return any value"]:
+        """
+        Writes content to a specified file.
+        
+        :param file_path: The path to the file where content will be written.
+        :param content: The content to write to the file.
+        :param mode: The file mode, e.g., 'w' for write, 'a' for append.
+        :return: None
+        """
+        with open(file_path, mode) as file:
+            file.write(content)
