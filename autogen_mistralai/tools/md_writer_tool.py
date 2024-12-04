@@ -1,4 +1,4 @@
-from typing import List, Dict, Annotated
+from typing import List, Dict, Annotated, Union
 import json
 
 
@@ -113,11 +113,13 @@ class MarkdownHelper:
         
 
 
-    def parse_package_json() -> Annotated[Dict[str, str], "Dictionary with extracted fields from a hardcoded package.json"] :
+    def parse_package_json() -> Annotated[Union[Dict[str, str], str], "Dictionary with extracted fields or the original JSON string if an error occurs"]:
         """
         Parse a hardcoded package.json string to extract relevant fields.
 
-        :return: A dictionary with extracted fields.
+        If parsing fails due to any exception, the original JSON string is returned.
+
+        :return: A dictionary with extracted fields, or the original JSON string if an error occurs.
         """
         json_string = """{
             "name": "awesome-project",
@@ -160,25 +162,29 @@ class MarkdownHelper:
                 "type": "individual",
                 "url": "https://github.com/sponsors/janedoe"
             }
-            }"""  
-    
-        data = json.loads(json_string) 
-        return {
-            "name": data.get("name", "Unknown Project"),
-            "version": data.get("version", "Unknown Version"),
-            "description": data.get("description", "No description provided."),
-            "scripts": data.get("scripts", {}),
-            "author": data.get("author", "Unknown Author"),
-            "license": data.get("license", "No license specified."),
-            "repository": data.get("repository", {}),
-            "bugs": data.get("bugs", {}),
-            "homepage": data.get("homepage", ""),
-            "keywords": data.get("keywords", []),
-            "dependencies": data.get("dependencies", {}),
-            "devDependencies": data.get("devDependencies", {}),
-            "engines": data.get("engines", {}),
-            "funding": data.get("funding", {})
-        }
+        }"""
+
+        try:
+            data = json.loads(json_string)
+            return {
+                "name": data.get("name", "Unknown Project"),
+                "version": data.get("version", "Unknown Version"),
+                "description": data.get("description", "No description provided."),
+                "scripts": data.get("scripts", {}),
+                "author": data.get("author", "Unknown Author"),
+                "license": data.get("license", "No license specified."),
+                "repository": data.get("repository", {}),
+                "bugs": data.get("bugs", {}),
+                "homepage": data.get("homepage", ""),
+                "keywords": data.get("keywords", []),
+                "dependencies": data.get("dependencies", {}),
+                "devDependencies": data.get("devDependencies", {}),
+                "engines": data.get("engines", {}),
+                "funding": data.get("funding", {})
+            }
+        except Exception as e:
+            print(f"Error occurred: {e}")
+            return json_string
         
     def write_to_file(
     file_path: Annotated[str, "The path to the file where content will be written"], 

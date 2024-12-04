@@ -11,13 +11,13 @@ ReAct_prompt = """
     Steps:
     1. Parse the `package.json` and reason about the required sections.
     2. Use tools to generate Markdown appropriate content.
-    3. Verify 
     3. Call `write_to_file` to save the content incrementally.
 
     Remember:
     - Each tool generates content but does not write files.
     - Only the `write_to_file` function should write to the file.
     - Follow step-by-step reasoning.
+    - This task does not require code generation, use only the provided tools.
     """
 
 
@@ -39,6 +39,7 @@ def create_readme_generator_agent() -> AssistantAgent:
             Your task is to analyze the fields in a `package.json` file and generate an appropriate README file using only the tools provided.
             Include information logically based on the following guidelines:
             - Always include the project name and description.
+            - Always include a `Getting started section`.
             - Include scripts if they are present in the package.json file the scripts should be constructed as follows:
                 1. A description of what the script is used for in a paragraph.
                 2. A code block with the script's command using the mh_code_block tool prefixed with npm run.
