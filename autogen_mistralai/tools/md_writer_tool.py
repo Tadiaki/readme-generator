@@ -162,7 +162,7 @@ class MarkdownHelper:
                 "type": "individual",
                 "url": "https://github.com/sponsors/janedoe"
             }
-        }"""
+            }"""
 
         try:
             data = json.loads(json_string)

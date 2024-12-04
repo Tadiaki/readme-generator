@@ -1,4 +1,4 @@
- {
+{
   "name": "awesome-project",
   "version": "1.0.0",
   "description": "A mock package.json file for generating a README.md using an LLM.",

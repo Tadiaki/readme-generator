@@ -1,0 +1,253 @@
+PS C:\Users\Janwo\Desktop\Bachelor\Machine Learning\readme-generator> python -m autogen_mistralai.agent.readme_generator_agent
+flaml.automl is not available. Please install flaml[automl] to enable AutoML functionalities.
+registering readme generator header
+registering readme generator paragraph
+registering readme generator list
+registering readme generator code_block
+registering readme generator link
+registering readme generator image
+registering readme generator table
+registering readme generator blockquote
+registering readme generator horizontal_rule
+registering parse_package_json
+registering write_to_file
+User (to Assistant):
+
+Generate a README for a project using the provided project example data and write a readme.md file.
+
+--------------------------------------------------------------------------------
+C:\Users\Janwo\Desktop\Bachelor\Machine Learning\readme-generator\.venv\lib\site-packages\autogen\oai\mistral.py:272: UserWarning: Cost calculation is not implemented for model open-mistral-nemo, will return $0.
+  warnings.warn(f"Cost calculation is not implemented for model {model_name}, will return $0.", UserWarning)
+Assistant (to User):
+
+
+***** Suggested tool call (hDDYzNfBe): mh_parse_package_json *****
+Arguments:
+{}
+******************************************************************
+
+--------------------------------------------------------------------------------
+
+>>>>>>>> EXECUTING FUNCTION mh_parse_package_json...
+User (to Assistant):
+
+User (to Assistant):
+
+***** Response from calling tool (hDDYzNfBe) *****
+{"name": "syncpack", "version": "13.0.0", "description": "Consistent dependency versions in large JavaScript Monorepos", "scripts": {"build": "pnpm run clean && pnpm run build:source && pnpm run build:json-schema", "build:json-schema": "typescript-json-schema --esModuleInterop --noExtraProps --ignoreErrors src/index.ts RcFile --out dist/schema.json", "build:source": "tsc --project tsconfig.build.json", "clean": "rm -rf ./dist", "format": "pnpm run format:source && pnpm run format:astro", "format:astro": "prettier --write site/src", "format:source": "biome check --write --unsafe", "lint": "npm run lint:source && npm run lint:engines", "lint:engines": "node scripts/check-engines.mjs", "lint:source": "biome check && tsc --noEmit", "prepack": "pnpm run build", "release": "release-it", "test": "vitest run --coverage src", "test:watch": "vitest run --no-coverage --watch"}, "author": "Jamie Mason <jamie@foldleft.io> (https://github.com/JamieMason)", "license": "MIT", "repository": "JamieMason/syncpack", "bugs": "https://github.com/JamieMason/syncpack/issues", "homepage": "https://github.com/JamieMason/syncpack#readme", "keywords": ["dependencies", "exact-versions", "lerna", "lernajs", "monorepo", "npm", "nx", "package-json", "packages", "pnpm", "semver", "sort-package-json", "turbo", "turborepo", "version-linter", "versions", "workspaces", "yarn"], "dependencies": {"@effect/schema": "0.71.1", "chalk": "5.3.0", "chalk-template": "1.1.0", "commander": "12.1.0", "cosmiconfig": "9.0.0", "effect": "3.6.5", "enquirer": "2.4.1", "fast-check": "3.21.0", "globby": "14.0.2", "jsonc-parser": "3.3.1", "minimatch": "9.0.5", "npm-package-arg": "11.0.3", "ora": "8.0.1", "prompts": "2.4.2", "read-yaml-file": "2.1.0", "semver": "7.6.3", "tightrope": "0.2.0", "ts-toolbelt": "9.6.0"}, "devDependencies": {"@biomejs/biome": "1.8.3", "@release-it/conventional-changelog": "8.0.1", "@tsconfig/node18": "18.2.4", "@types/node": "22.5.0", "@types/npm-package-arg": "6.1.4", "@types/prompts": "2.4.9", "@types/semver": "7.5.8", "@vitest/coverage-v8": "2.0.5", "auto-changelog": "2.4.0", "memfs": "4.11.1", "prettier": "3.3.3", "prettier-plugin-astro": "0.14.1", "release-it": "17.6.0", "ts-node": "10.9.2", "typescript": "5.5.4", "typescript-json-schema": "0.65.1", "vitest": "2.0.5"}, "engines": {"node": ">=18.18.0"}, "funding": {}}
+**************************************************
+
+--------------------------------------------------------------------------------
+Assistant (to User):
+
+
+***** Suggested tool call (MPOt1sD10): mh_header *****
+Arguments:
+{"level": 1, "text": "syncpack"}
+******************************************************
+
+--------------------------------------------------------------------------------
+
+>>>>>>>> EXECUTING FUNCTION mh_header...
+User (to Assistant):
+
+User (to Assistant):
+
+***** Response from calling tool (MPOt1sD10) *****
+# syncpack
+
+**************************************************
+
+--------------------------------------------------------------------------------
+Assistant (to User):
+
+
+***** Suggested tool call (MA9qCRWjb): mh_header *****
+Arguments:
+{"level": 2, "text": "Consistent dependency versions in large JavaScript Monorepos"}
+******************************************************
+
+--------------------------------------------------------------------------------
+
+>>>>>>>> EXECUTING FUNCTION mh_header...
+User (to Assistant):
+
+User (to Assistant):
+
+***** Response from calling tool (MA9qCRWjb) *****
+## Consistent dependency versions in large JavaScript Monorepos
+
+**************************************************
+
+--------------------------------------------------------------------------------
+Assistant (to User):
+
+
+***** Suggested tool call (ENCW9zp4y): mh_horizontal_rule *****
+Arguments:
+{}
+***************************************************************
+
+--------------------------------------------------------------------------------
+
+>>>>>>>> EXECUTING FUNCTION mh_horizontal_rule...
+User (to Assistant):
+
+User (to Assistant):
+
+***** Response from calling tool (ENCW9zp4y) *****
+---
+
+**************************************************
+
+--------------------------------------------------------------------------------
+Assistant (to User):
+
+
+***** Suggested tool call (xkkHKccoU): mh_paragraph *****
+Arguments:
+{"text": "syncpack helps manage consistent dependency versions across large JavaScript monorepos using npm, Yarn, or pnpm."}
+*********************************************************
+
+--------------------------------------------------------------------------------
+
+>>>>>>>> EXECUTING FUNCTION mh_paragraph...
+User (to Assistant):
+
+User (to Assistant):
+
+***** Response from calling tool (xkkHKccoU) *****
+syncpack helps manage consistent dependency versions across large JavaScript monorepos using npm, Yarn, or pnpm.
+
+**************************************************
+
+--------------------------------------------------------------------------------
+Assistant (to User):
+
+
+***** Suggested tool call (q98VSnsZS): mh_header *****
+Arguments:
+{"level": 2, "text": "Getting Started"}
+******************************************************
+***** Suggested tool call (yFVO6gEav): mh_horizontal_rule *****
+Arguments:
+{}
+***************************************************************
+
+--------------------------------------------------------------------------------
+
+>>>>>>>> EXECUTING FUNCTION mh_header...
+
+>>>>>>>> EXECUTING FUNCTION mh_horizontal_rule...
+User (to Assistant):
+
+User (to Assistant):
+
+***** Response from calling tool (q98VSnsZS) *****
+## Getting Started
+
+**************************************************
+
+--------------------------------------------------------------------------------
+User (to Assistant):
+
+***** Response from calling tool (yFVO6gEav) *****
+---
+
+**************************************************
+
+--------------------------------------------------------------------------------
+Assistant (to User):
+
+
+***** Suggested tool call (4SiX0rmae): mh_paragraph *****
+Arguments:
+{"text": "To get started with syncpack, follow these steps:"}
+*********************************************************
+
+--------------------------------------------------------------------------------
+
+>>>>>>>> EXECUTING FUNCTION mh_paragraph...
+User (to Assistant):
+
+User (to Assistant):
+
+***** Response from calling tool (4SiX0rmae) *****
+To get started with syncpack, follow these steps:
+
+**************************************************
+
+--------------------------------------------------------------------------------
+Assistant (to User):
+
+
+***** Suggested tool call (jXFcJHLKe): mh_list *****
+Arguments:
+{"items": ["Install syncpack as a dev dependency.", "Run syncpack to synchronize dependency versions."], "ordered": false}
+****************************************************
+
+--------------------------------------------------------------------------------
+
+>>>>>>>> EXECUTING FUNCTION mh_list...
+User (to Assistant):
+
+User (to Assistant):
+
+***** Response from calling tool (jXFcJHLKe) *****
+- Install syncpack as a dev dependency.
+- Run syncpack to synchronize dependency versions.
+
+**************************************************
+
+--------------------------------------------------------------------------------
+Assistant (to User):
+
+
+***** Suggested tool call (kKgqND1Xb): mh_header *****
+Arguments:
+{"level": 3, "text": "Installation"}
+******************************************************
+
+--------------------------------------------------------------------------------
+
+>>>>>>>> EXECUTING FUNCTION mh_header...
+User (to Assistant):
+
+User (to Assistant):
+
+***** Response from calling tool (kKgqND1Xb) *****
+### Installation
+
+**************************************************
+
+--------------------------------------------------------------------------------
+Assistant (to User):
+
+
+***** Suggested tool call (UdYcUdEXJ): mh_paragraph *****
+Arguments:
+{"text": "Install syncpack using npm, Yarn, or pnpm:"}
+*********************************************************
+
+--------------------------------------------------------------------------------
+
+>>>>>>>> EXECUTING FUNCTION mh_paragraph...
+User (to Assistant):
+
+User (to Assistant):
+
+***** Response from calling tool (UdYcUdEXJ) *****
+Install syncpack using npm, Yarn, or pnpm:
+
+**************************************************
+
+--------------------------------------------------------------------------------
+Assistant (to User):
+
+
+***** Suggested tool call (OCvGdypaU): mh_code_block *****
+Arguments:
+{"code": "npm install --save-dev syncpack", "language": ""}
+**********************************************************
+
+--------------------------------------------------------------------------------
