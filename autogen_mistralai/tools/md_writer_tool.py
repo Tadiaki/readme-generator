@@ -113,72 +113,121 @@ class MarkdownHelper:
         
 
 
-    def parse_package_json() -> Annotated[Dict[str, str], "Dictionary with extracted fields from a hardcoded package.json"] :
+    def provide_package_json_string() -> Annotated[str, "string from a hardcoded package.json"] :
         """
-        Parse a hardcoded package.json string to extract relevant fields.
+        Returns the annotated package.json content as a string.
 
-        :return: A dictionary with extracted fields.
         """
-        json_string = """{
-            "name": "awesome-project",
-            "version": "1.0.0",
-            "description": "A mock package.json file for generating a README.md using an LLM.",
-            "main": "index.js",
-            "scripts": {
-                "start": "node index.js",
-                "test": "jest",
-                "build": "webpack --mode production",
-                "lint": "eslint .",
-                "format": "prettier --write ."
-            },
-            "keywords": ["markdown", "readme", "generator", "example"],
-            "author": "Jane Doe <jane.doe@example.com>",
-            "license": "MIT",
-            "repository": {
-                "type": "git",
-                "url": "https://github.com/janedoe/awesome-project.git"
-            },
-            "bugs": {
-                "url": "https://github.com/janedoe/awesome-project/issues"
-            },
-            "homepage": "https://github.com/janedoe/awesome-project#readme",
-            "dependencies": {
-                "express": "^4.18.2",
-                "cors": "^2.8.5"
-            },
-            "devDependencies": {
-                "jest": "^29.6.2",
-                "webpack": "^5.88.2",
-                "eslint": "^8.47.0",
-                "prettier": "^3.0.3"
-            },
-            "engines": {
-                "node": ">=14.0.0",
-                "npm": ">=6.0.0"
-            },
-            "funding": {
-                "type": "individual",
-                "url": "https://github.com/sponsors/janedoe"
-            }
-            }"""  
+        return  """{
+  "name": "taskpro-manager",
+  "version": "2.3.1",
+  "description": "TaskPro Manager is a robust task management and productivity app with real-time collaboration and cloud sync.",
+  "main": "dist/server.js",
+  "scripts": {
+    "start": "node dist/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "jest --verbose --coverage",
+    "build": "webpack --config webpack.config.js --mode production",
+    "clean": "rimraf dist && rimraf build",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
+    "serve": "http-server dist -p 8080",
+    "prepare": "husky install",
+    "precommit": "lint-staged",
+    "analyze": "webpack-bundle-analyzer build/stats.json"
+  },
+  "keywords": [
+    "task management",
+    "productivity",
+    "collaboration",
+    "cloud sync",
+    "web app"
+  ],
+  "author": {
+    "name": "Sophie Martinez",
+    "email": "sophie@taskpro.com",
+    "url": "https://www.taskpro.com/team/sophie"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/taskpro-inc/taskpro-manager.git"
+  },
+  "bugs": {
+    "url": "https://github.com/taskpro-inc/taskpro-manager/issues",
+    "email": "support@taskpro.com"
+  },
+  "homepage": "https://www.taskpro.com",
+  "dependencies": {
+    "express": "^4.18.2",
+    "dotenv": "^16.0.3",
+    "mongoose": "^7.5.0",
+    "socket.io": "^4.7.2",
+    "jsonwebtoken": "^9.1.1",
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "uuid": "^9.0.0",
+    "dayjs": "^1.11.9"
+  },
+  "devDependencies": {
+    "jest": "^29.6.2",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.1",
+    "eslint": "^8.47.0",
+    "eslint-plugin-react": "^7.32.2",
+    "prettier": "^3.0.3",
+    "nodemon": "^3.0.1",
+    "http-server": "^14.1.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.3.0",
+    "rimraf": "^5.0.0",
+    "sass": "^1.66.1",
+    "typescript": "^5.4.2",
+    "webpack-bundle-analyzer": "^4.9.0"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.4.2"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "funding": {
+    "type": "corporate",
+    "url": "https://www.taskpro.com/support-us"
+  },
+  "config": {
+    "port": 8080,
+    "env": "production"
+  },
+  "private": false,
+  "os": ["linux", "darwin", "win32"],
+  "cpu": ["x64", "arm64"],
+  "bin": {
+    "taskpro-cli": "./bin/taskpro-cli.js"
+  },
+  "workspaces": ["packages/api", "packages/frontend", "packages/shared"],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./utils": {
+      "import": "./dist/utils.mjs",
+      "require": "./dist/utils.cjs"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "files": ["dist", "src", "bin", "README.md"],
+  "readme": "README.md"
+}
+"""  
     
-        data = json.loads(json_string) 
-        return {
-            "name": data.get("name", "Unknown Project"),
-            "version": data.get("version", "Unknown Version"),
-            "description": data.get("description", "No description provided."),
-            "scripts": data.get("scripts", {}),
-            "author": data.get("author", "Unknown Author"),
-            "license": data.get("license", "No license specified."),
-            "repository": data.get("repository", {}),
-            "bugs": data.get("bugs", {}),
-            "homepage": data.get("homepage", ""),
-            "keywords": data.get("keywords", []),
-            "dependencies": data.get("dependencies", {}),
-            "devDependencies": data.get("devDependencies", {}),
-            "engines": data.get("engines", {}),
-            "funding": data.get("funding", {})
-        }
+
         
     def write_to_file(
     file_path: Annotated[str, "The path to the file where content will be written"], 

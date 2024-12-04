@@ -30,25 +30,32 @@ def react_prompt_message(sender, recipient, context):
 
 def create_readme_generator_agent() -> AssistantAgent:
     """
-    Create a readme generator agent.
+    Create a README generator agent.
     """
     agent = AssistantAgent(
         name="Assistant",
         system_message="""
-            You are a markdown generator assistant. 
-            Your task is to analyze the fields in a `package.json` file and generate an appropriate README file using only the tools provided.
-            Include information logically based on the following guidelines:
-            - Always include the project name and description.
-            - Include scripts if they are present in the package.json file the scripts should be constructed as follows:
-                1. A description of what the script is used for in a paragraph.
-                2. A code block with the script's command using the mh_code_block tool prefixed with npm run.
-            - Add sections for dependencies (and their versions), license, and author if applicable.
-            - Use the registered Markdown functions to generate the content.
+            You are a Markdown generator assistant tasked with creating professional README files based on the fields in a `package.json` file. Your objective is to produce clear, structured, and developer-friendly documentation. Follow these guidelines:
 
-            Do not output anything other than the tools' results or the final answer. Reply with TERMINATE when the task is done.
-            """,
+            1. **Project Information**: Include the project name and a concise description of its purpose.
+            2. **Setup Instructions**: Add steps for installation and prerequisites required to use the project.
+            3. **Usage Guide**: For each script in the `package.json`, provide:
+               - A brief explanation of its purpose.
+               - A code block with the corresponding `npm run` command.
+            4. **Dependencies**: List all dependencies and their versions.
+            5. **License**: Include the license type specified in the `package.json`.
+            6. **Author Details**: Provide author information if available.
+
+            Additional Notes:
+            - Use a clear hierarchy with section titles.
+            - Format code blocks properly for readability.
+            - Add placeholders or notes if any critical information is missing in the `package.json`.
+
+            Use registered Markdown functions for content generation. Respond only with the tool's output or the final README. Conclude with "TERMINATE" when the task is complete.
+        """,
         llm_config=copy.deepcopy(LLM_CONFIG)
     )
+
 
     return agent
 
@@ -170,13 +177,13 @@ def setup_agents():
     )
     
     
-    print("registering parse_package_json")
+    print("registering provide_package_json_string")
     register_function(
-        MH.parse_package_json, 
+        MH.provide_package_json_string, 
         caller=readme_generator_agent, 
         executor=user_proxy, 
-        name="mh_parse_package_json", 
-        description="Parses a package.json file and returns relevant fields like name, description, scripts, author, and license."
+        name="mh_provide_package_json_string", 
+        description="Provides a complete package json as a string to use for README generation."
     )
     
     print("registering write_to_file")
