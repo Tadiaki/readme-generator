@@ -47,6 +47,8 @@ In our case the agent uses the open-mistral-nemo model, which is a hosted free t
 
 If you want to run it all locally, you can use an option such as [Ollama](https://ollama.com/).
 
+## Usage
+
 To run the application run the following command from the root directory:
 
 ```
@@ -58,9 +60,9 @@ python -m autogen_mistralai.agent.readme_generator_agent
 
 | Package | Version |
 |---------|---------|
+| Python | 3.10+ |
 | [mistralai](https://github.com/mistralai/client-python) | 1.2.3 |
-| @git+https://github.com/patrickstolc/autogen.git@0.2#egg=autogen-agentchat | 0.2 |
-
+| Autogen from @git+https://github.com/patrickstolc/autogen.git@0.2#egg=autogen-agentchat | 0.2 |
 
 ## Authors
 
@@ -75,4 +77,3 @@ MIT
 ## Repository
 
 [GitHub](https://github.com/Tadiaki/readme-generator)
-
