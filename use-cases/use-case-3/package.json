@@ -1,0 +1,82 @@
+{
+  "name": "foodie-finder",
+  "version": "1.7.0",
+  "description": "FoodieFinder helps users discover local restaurants and food trucks, view menus, and leave reviews.",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "test": "mocha tests/**/*.test.js --timeout 5000",
+    "build": "vite build",
+    "serve": "vite preview",
+    "lint": "eslint .",
+    "prettify": "prettier --write \"**/*.{js,json,css,html}\"",
+    "db:migrate": "sequelize-cli db:migrate",
+    "db:seed": "sequelize-cli db:seed:all",
+    "clean": "rimraf dist",
+    "check-types": "tsc --noEmit"
+  },
+  "keywords": ["food", "restaurants", "reviews", "discovery", "web app"],
+  "author": {
+    "name": "Liam Chen",
+    "email": "liam.chen@foodiefinder.io",
+    "url": "https://www.foodiefinder.io/team/liam"
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/foodiefinder/foodie-finder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/foodiefinder/foodie-finder/issues"
+  },
+  "homepage": "https://www.foodiefinder.io",
+  "dependencies": {
+    "express": "^4.18.2",
+    "sequelize": "^6.33.0",
+    "pg": "^8.11.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "axios": "^1.6.0",
+    "jsonwebtoken": "^9.1.1",
+    "multer": "^1.4.5-lts.1",
+    "sharp": "^0.32.0",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.47.0",
+    "prettier": "^3.0.3",
+    "nodemon": "^3.0.1",
+    "mocha": "^10.2.0",
+    "chai": "^4.3.7",
+    "vite": "^5.2.0",
+    "sequelize-cli": "^6.6.0",
+    "typescript": "^5.4.2",
+    "rimraf": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "config": {
+    "port": 3000,
+    "db_host": "localhost",
+    "db_port": 5432
+  },
+  "private": false,
+  "os": ["linux", "darwin", "win32"],
+  "cpu": ["x64", "arm64"],
+  "workspaces": ["api", "frontend", "shared"],
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./routes": {
+      "import": "./dist/routes/index.mjs",
+      "require": "./dist/routes/index.cjs"
+    }
+  },
+  "readme": "README.md"
+}
