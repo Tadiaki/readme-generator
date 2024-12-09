@@ -47,6 +47,12 @@ In our case the agent uses the open-mistral-nemo model, which is a hosted free t
 
 If you want to run it all locally, you can use an option such as [Ollama](https://ollama.com/).
 
+To run the application run the following command from the root directory:
+
+```
+python -m autogen_mistralai.agent.readme_generator_agent
+```
+
 
 ## Dependencies
 
