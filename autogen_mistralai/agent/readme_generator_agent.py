@@ -4,29 +4,6 @@ from autogen.coding import LocalCommandLineCodeExecutor
 from autogen_mistralai.tools.md_writer_tool import MarkdownHelper as MH
 from autogen_mistralai.config import LLM_CONFIG
 
-ReAct_prompt = """
-    Your task is to create a README file based on the `package.json`. 
-    Use the tools to generate content and call the file-writing function to save it.
-
-    Steps:
-    1. Parse the `package.json` and reason about the required sections.
-    2. Use tools to generate Markdown appropriate content.
-    3. Call `write_to_file` to save the content incrementally.
-
-    Remember:
-    - Each tool generates content but does not write files.
-    - Only the `write_to_file` function should write to the file.
-    - Follow step-by-step reasoning.
-    - This task does not require code generation, use only the provided tools.
-    """
-
-
-def react_prompt_message(sender, recipient, context):
-    """
-    Return the ReAct prompt message interpolated with the input question.
-    """
-    return ReAct_prompt.format(input=context["question"])
-
 
 def create_readme_generator_agent() -> AssistantAgent:
     """
